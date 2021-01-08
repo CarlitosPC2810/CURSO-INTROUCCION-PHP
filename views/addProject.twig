@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Add projects</title>
+</head>
+<body>
+    <form action="/CURSO-INTROUCCION-PHP/projects/add" method="POST" enctype="multipart/form-data">
+        <a href="/CURSO-INTROUCCION-PHP">regresar</a><br>
+       {% if responseMessage != ""%}
+        <div class="alert alert-primary" role="alert">
+            {{ responseMessage }}
+        </div>
+        {% endif %}
+        <label for="">Title</label>
+        <input type="text" name="title" class="form-control"><br>
+        <label for="">Description</label>
+        <input type="text" name="description" class="form-control"><br>
+        <input type="file" name="logo"/><br>
+        <button type="submit" class="btn">Save</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,22 @@
+Flags:
+
+[NC] = Not Case Sensitive. Es para que en %{THE_REQUEST} tome en cuenta lo escrito, esté en mayúsculas o no.
+[L] = Last - stop processing rules. Ya no siga evaluando las reglas que siguen abajo en el archivo .htaccess (RewriteRule) en caso que RewriteRule coincida con la url
+[NE] = Do not escape special URL characters in output. No escapar los caracteres especiales
+[R=302] = permanent redirect to new URL. En este caso, con código 302
+[QSA] = toma todos los parámetros pasados por GET, y los incluye en la redirección. También combina parámetros de la url original con la nueva.
+Ej:
+
+url original: hola.com/index.php?var=val
+url destino: hola.com/public/?nuevo=1
+Url final: hola.com/public/?nuevo=1&var=val
+
+Explicación htaccess:
+
+RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+
+Evalúa la url de la petición recibida, verificando si contiene “/public/(Cualquier caracter distinto a espacio y signo de interrogación, que esté 0 o más veces)”, no sensible a mayúsculas y minúsculas.
+
+RewriteRule ^ %1 [L,NE,R=302]
+
+Reemplaza toda la url después de public/ en adelante, por todo lo encontrado en RewriteCond, en este caso, lo que está en paréntesis ([^\s?]*), indicando que es la última regla a evaluar en el htccess ([L]), sin escapar caracteres especiales ([NE]) y devolviendo un 302 redireccionando a la nueva url indicada ([R=302]).
